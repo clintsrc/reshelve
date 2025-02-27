@@ -1,19 +1,25 @@
 {
-  "name": "googlebooks-app",
+  "name": "reshelve",
   "version": "1.0.0",
-  "description": "",
+  "description": "A MERN Google Books API application that uses GraphQL API and Apollo Server after being refactored from RESTful APIs.",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js",
-    "dev": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
+    "cleanall": "npm ci && concurrently \"npm run clean --prefix client\" \"npm run clean --prefix server\"",
+    "start": "npm run client:build && npm run server",
+    "server": "cd server && npm start",
+    "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
+    "client:dev": "cd client && npm run dev",
+    "server:dev": "cd server && npm run dev",
     "install": "cd server && npm i && cd ../client && npm i",
     "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\"",
-    "render-build":"echo $NODE_ENV && npm install && npm run build"
+    "client:build": "cd client && npm run build",
+    "render-build": "npm install && npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^8.2.0"
+    "concurrently": "^8.2.0",
+    "wait-on": "^8.0.2"
   }
 }

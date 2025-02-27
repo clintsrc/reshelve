@@ -5,9 +5,11 @@
   "main": "dist/server.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "watch": "nodemon dist/server.js",
+    "clean": "rimraf dist",
+    "build": "npx tsc",
+    "start": "npm run build && node dist/server.js --ignore client",
+    "dev": "npx nodemon dist/server.js",
+    "watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -27,6 +29,7 @@
     "@types/node": "^20.14.8",
     "dotenv": "^16.4.5",
     "nodemon": "^3.1.0",
+    "rimraf": "^6.0.1",
     "typescript": "^5.4.5"
   }
 }
