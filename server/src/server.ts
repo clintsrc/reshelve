@@ -3,6 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import db from './config/connection.js';
 import routes from './routes/index.js';
+import dotenv from "dotenv";
+dotenv.config();  // check the env for PORT 
 
 const app = express();
 const PORT = process.env.PORT || 3001;
