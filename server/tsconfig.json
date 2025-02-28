@@ -1,5 +1,6 @@
 {
   "extends": "../tsconfig.json",
+  "noEmitOnError": true,
   "compilerOptions": {
     /* Modules */
     "rootDir": "src" /* Specify the root folder within your source files. */,
