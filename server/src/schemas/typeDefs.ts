@@ -1,39 +1,62 @@
 const typeDefs = `
   type Book {
     _id: ID
-    bookId: String
+    bookId: String  # from the Google Books API
     title: String
-    authors: [String]
+    authors: [String] # handle multiple authors
     description: String!
     image: String
     link: String
   }
 
   type User {
-    id: ID
+    _id: ID
+    username: String
+    email: String
+    password: String
+    bookCount: Int
+    savedBooks: [Book]!
+  }
+
+  input BookInput {
+    bookId: String!
+    title: String!
+    authors: [String]!
+    description: String!
+    image: String
+    link: String
+  }
+
+  input UserInput {
     username: String!
     email: String!
     password: String!
-    savedBooks: [Book]
   }
 
+  type Auth {
+    token: ID!
+    user: User
+  }
+
+  ##############  Queries
   type Query {
-    # Get a single user by their id or username
-    getUser(id: ID, username: String): User
+    user(username: String!): User
+    # me: User  # TODO -- add in later
   }
 
+  ##############  Mutations
   type Mutation {
-    # Create a new user
-    createUser(username: String!, email: String!, password: String!): User
+    # Add a new user (signup)
+    addUser(input: UserInput!): Auth
     
-    # Login user and return JWT token
-    loginUser(username: String!, password: String!): String  # Returns JWT (token)
+    # Login user and return JWT token (signin)
+    login(email: String!, password: String!): Auth
     
-    # Save a book to a user's savedBooks
-    saveBook(bookId: String!, title: String!, authors: [String]!, description: String!, image: String, link: String): User
-    
-    # Delete a book from a user's savedBooks
-    deleteBook(bookId: String!): User
+    # Save a book to a user's books list
+    saveBook(input: BookInput!): User
+
+    # Delete a book from a user's books list
+    removeBook(bookId: String!): User
   }
 
 `;
