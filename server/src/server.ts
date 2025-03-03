@@ -7,7 +7,6 @@ import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import db from "./config/connection.js";
-import routes from "./routes/index.js"; //remove
 import dotenv from "dotenv";
 dotenv.config(); // check the env for PORT
 
@@ -46,8 +45,6 @@ const startApolloServer = async () => {
       res.sendFile(path.join(__dirname, "../../../client/dist/index.html"));
     });
   }
-
-  app.use(routes); // remove
 
   app.listen(PORT, () => {
     console.log(`🌍 Now listening on localhost:${PORT}`);
