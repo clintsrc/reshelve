@@ -48,7 +48,9 @@ const startApolloServer = async () => {
 
     // Manually define __dirname in ES modules
     const __filename = fileURLToPath(import.meta.url);
+    console.log("__filename is:", __filename);
     const __dirname = path.dirname(__filename);
+    console.log("__dirname is:", __filename);
 
     app.use(express.static(path.join(__dirname, "../../../client/dist")));
 
