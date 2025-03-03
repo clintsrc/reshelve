@@ -115,6 +115,7 @@ const resolvers = {
       { input }: SaveBookArgs,
       context: any
     ) => {
+      console.log('Received bookInput:', bookInput);
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
