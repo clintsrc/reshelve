@@ -5,7 +5,12 @@ import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
-const SignupForm = () => {
+
+interface SignUpFormProps {
+  handleModalClose: () => void;
+}
+
+const SignupForm: React.FC<SignUpFormProps> = ({ handleModalClose }) => {
   const [formState, setFormState] = useState({
     username: '',
     email: '',
@@ -43,6 +48,7 @@ const SignupForm = () => {
 
       const { token } = data.addUser;
       Auth.login(token);
+      handleModalClose(); // Close the modal after successful signup
     } catch (err) {
       console.error(err);
       setShowAlert(true);
