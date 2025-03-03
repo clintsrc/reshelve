@@ -1,4 +1,3 @@
-import fs from "fs";
 import { typeDefs, resolvers } from "./schemas/index.js";
 import { authenticateToken } from "./utils/auth.js";
 import type { Request, Response } from "express";
@@ -35,27 +34,18 @@ const startApolloServer = async () => {
 
   // if we're in production, serve client/build as static assets
   if (process.env.NODE_ENV === "production") {
-    console.log("Running in production mode");
-    console.log("Current working directory:", process.cwd());
-
-    fs.readdir(process.cwd(), (err, files) => {
-      if (err) {
-        console.error("Error reading directory:", err);
-      } else {
-        console.log("Contents of the current working directory:", files);
-      }
-    });
+    console.log("Serving in production mode");
 
     // Manually define __dirname in ES modules
+    // get the full path to this running server module
     const __filename = fileURLToPath(import.meta.url);
-    console.log("__filename is:", __filename);
+    // get the directory of the running module
     const __dirname = path.dirname(__filename);
-    console.log("__dirname is:", __filename);
-
-    app.use(express.static(path.join(__dirname, "../../../client/dist")));
+    // point to the static client build
+    app.use(express.static(path.join(__dirname, "../../client/dist")));
 
     app.get("*", (_req: Request, res: Response) => {
-      res.sendFile(path.join(__dirname, "../../../client/dist/index.html"));
+      res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
     });
   }
 
