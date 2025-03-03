@@ -35,7 +35,7 @@ const startApolloServer = async () => {
 
   // if we're in production, serve client/build as static assets
   if (process.env.NODE_ENV === "production") {
-    console.log("PRODUCTION");
+    console.log("Running in production mode");
     // Manually define __dirname in ES modules
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
