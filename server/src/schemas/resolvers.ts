@@ -44,11 +44,20 @@ const resolvers = {
    * Queries
    */
   Query: {
+    // return the user's information including their saved booklist
     user: async (_parent: unknown, { username }: UserArgs) => {
       return User.findOne({ username });
     },
-    // TODO
-    // me: ...
+
+    // Get the authenticated user's information from the context payload
+    me: async (_parent: unknown, _args: any, context: any) => {
+      // If the user is authenticated, find their user information including their saved booklist
+      if (context.user) {
+        return User.findOne({ _id: context.user._id });
+      }
+      // If the user is not authenticated, throw an AuthenticationError
+      throw new AuthenticationError("Could not authenticate user.");
+    },
   },
 
   /***
@@ -123,12 +132,16 @@ const resolvers = {
     },
 
     // Delete a book from the user's book list
-    removeBook: async (_parent: unknown, { bookId }: RemoveBookArgs, context: any) => {
+    removeBook: async (
+      _parent: unknown,
+      { bookId }: RemoveBookArgs,
+      context: any
+    ) => {
       if (context.user) {
         // Find the user
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: { bookId } } },  // remove the book from the saved list array
+          { $pull: { savedBooks: { bookId } } }, // remove the book from the saved list array
           { new: true } // Return the updated document
         );
 
@@ -140,8 +153,7 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-
-  },  // end mutations
-};  // end resolvers
+  }, // end mutations
+}; // end resolvers
 
 export default resolvers;

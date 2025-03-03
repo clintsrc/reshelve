@@ -41,7 +41,7 @@ const typeDefs = `
   ##############  Queries
   type Query {
     user(username: String!): User
-    # me: User  # TODO -- add in later
+    me: User
   }
 
   ##############  Mutations

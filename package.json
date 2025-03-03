@@ -6,7 +6,7 @@
   "scripts": {
     "cleanall": "npm ci && concurrently \"npm run clean --prefix client\" \"npm run clean --prefix server\"",
     "start": "npm run client:build && npm run server",
-    "server": "cd server && npm start",
+    "server": "cd server && npm run start",
     "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
     "client:dev": "cd client && npm run dev",
     "server:dev": "cd server && npm run dev",
