@@ -46,12 +46,14 @@ const resolvers = {
   Query: {
     // return the user's information including their saved booklist
     user: async (_parent: unknown, { username }: UserArgs) => {
+      console.log("user Received input:", username);
       return User.findOne({ username });
     },
 
     // Get the authenticated user's information from the context payload
     me: async (_parent: unknown, _args: any, context: any) => {
       // If the user is authenticated, find their user information including their saved booklist
+      console.log("me Received for user:", context.user._id);
       if (context.user) {
         return User.findOne({ _id: context.user._id });
       }
@@ -66,6 +68,7 @@ const resolvers = {
   Mutation: {
     // Create a new user and return a token (signup)
     addUser: async (_parent: unknown, { input }: AddUserArgs) => {
+      console.log("addUser Received input:", input.email);
       try {
         // Create a new user with the provided username, email, and password
         const user = await User.create({ ...input });
@@ -82,6 +85,7 @@ const resolvers = {
 
     // Login user and return a token (signin)
     loginUser: async (_parent: unknown, { email, password }: LoginUserArgs) => {
+      console.log("loginUser Received input for:", email);
       try {
         // Find a user with the provided email
         const user = await User.findOne({ email });
@@ -115,7 +119,7 @@ const resolvers = {
       { input }: SaveBookArgs,
       context: any
     ) => {
-      console.log('Received bookInput:', bookInput);
+      console.log("saveBook Received input:", input);
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -138,6 +142,7 @@ const resolvers = {
       { bookId }: RemoveBookArgs,
       context: any
     ) => {
+      console.log("removeBook Received bookId:", bookId);
       if (context.user) {
         // Find the user
         const updatedUser = await User.findOneAndUpdate(
