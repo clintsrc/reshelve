@@ -81,7 +81,7 @@ const resolvers = {
     },
 
     // Login user and return a token (signin)
-    login: async (_parent: unknown, { email, password }: LoginUserArgs) => {
+    loginUser: async (_parent: unknown, { email, password }: LoginUserArgs) => {
       try {
         // Find a user with the provided email
         const user = await User.findOne({ email });

@@ -50,7 +50,7 @@ const typeDefs = `
     addUser(input: UserInput!): Auth
     
     # Login user and return JWT token (signin)
-    login(email: String!, password: String!): Auth
+    loginUser(email: String!, password: String!): Auth
     
     # Save a book to a user's books list
     saveBook(input: BookInput!): User
