@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npx tsc && ls -la",
+    "build": "npx tsc && ls -lan dist",
     "start": "npm run build && node dist/server.js --ignore client",
     "dev": "npx nodemon dist/server.js",
     "watch": "tsc --watch",
