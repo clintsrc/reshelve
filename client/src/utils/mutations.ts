@@ -1,8 +1,19 @@
+/*
+ * Mutations
+ *
+ * Defines the mutations for the GraphQL API. Modifies data with create, update, and 
+ *  delete actions
+ * 
+ * Provides GraphQL mutations for managing users (signup and login) 
+ *  and their saved books list.
+ * 
+ */
+
 import { gql } from "@apollo/client";
 
 
 /**
- * User access
+ * User management
  */
 export const ADD_USER = gql`
   mutation addUser($input: UserInput!) {
@@ -31,7 +42,7 @@ export const LOGIN_USER = gql`
 `;
 
 /**
- * Book changes
+ * Book data management
  */
 export const SAVE_BOOK = gql`
   mutation saveBook($bookInput: BookInput!) {

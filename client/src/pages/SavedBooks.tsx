@@ -1,3 +1,14 @@
+/*
+ * SavedBooks page
+ *
+ * SavedBooks handles removing books from the user's saved books list.
+ * 
+ * It executes the GraphQL REMOVE_BOOK mutation to delete a book from the user's list.
+ * The GET_ME query is used to retrieve the current user data, including their current saved books list.
+ * It verifies the jwt token is valid before making a request to delete the book.
+ * After removing a book, the component updates the saved list and removes the book from local storage.
+ * 
+ */
 import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries'; // Import the GET_ME query
@@ -42,7 +53,7 @@ const SavedBooks = () => {
         throw new Error('something went wrong!');
       }
 
-      // Upon success, remove book's id from localStorage
+      // Remove book's id from localStorage after successful mongo update
       removeBookId(bookId);
     } catch (err) {
       console.error(err);

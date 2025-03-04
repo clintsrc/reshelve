@@ -1,3 +1,13 @@
+/*
+ * localStorage helper
+ *
+ * Provides a set of functions to interact with the client's localStorage.
+ * 
+ * Stores and retries a user's saved book list. Books are retrieved, and added and 
+ * removed by thier IDs.
+ * 
+ */
+
 export const getSavedBookIds = () => {
   const savedBookIds = localStorage.getItem('saved_books')
     ? JSON.parse(localStorage.getItem('saved_books')!)

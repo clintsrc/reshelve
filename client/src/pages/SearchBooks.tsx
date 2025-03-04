@@ -1,3 +1,15 @@
+/*
+ * SearchBooks page
+ *
+ * Handles adding books to the user's saved books list.
+ *
+ * Executes the GraphQL SAVE_BOOK mutation to add a book to the user's list.
+ * Verifies the JWT token is valid before making the request to add the book.
+ * After saving a book, the component updates the saved list and adds the 
+ *  book ID to local storage.
+ * 
+ */
+
 import { useState, useEffect } from 'react';
 import type { FormEvent } from 'react';
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap';

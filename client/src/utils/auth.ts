@@ -1,3 +1,15 @@
+/*
+ * Authentication helper for JWT
+ *
+ * Provides methods to handle JWT tokens in the client's localStorage:
+ *  Encrypts and stores tokens
+ *  Retrieves and decrypts tokens
+ *  Validates token and checks the expiration
+ * 
+ * Uses the token to manage the user's logged-in state
+ * 
+ */
+
 // use this to decode a token and get the user's information out of it
 import { jwtDecode } from 'jwt-decode';
 

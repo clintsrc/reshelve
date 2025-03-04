@@ -1,3 +1,16 @@
+/*
+ * SignUpForm component
+ *
+ * Handles user signup by executing the GraphQL ADD_USER mutation.
+ * The form collects the user's username, email, and password, then sends them to 
+ *  the backend.
+ * If the signup is successful, the JWT token is stored in the Auth object for 
+ *  authentication.
+ * 
+ * Manages error handling and provides user feedback in case of a failed signup attempt.
+ * After successful signup, the modal is closed, and the form is reset.
+ */
+
 import { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
@@ -5,7 +18,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
-
+// Interface to handle the modal close function passed as a prop
 interface SignUpFormProps {
   handleModalClose: () => void;
 }
@@ -19,7 +32,7 @@ const SignupForm: React.FC<SignUpFormProps> = ({ handleModalClose }) => {
 
   // state for form validation
   const [validated] = useState(false);
-  // state for alert
+  // state for alert if signup fails
   const [showAlert, setShowAlert] = useState(false);
 
   const [addUser, { error }] = useMutation(ADD_USER);
@@ -32,6 +45,7 @@ const SignupForm: React.FC<SignUpFormProps> = ({ handleModalClose }) => {
     });
   };
 
+  // Handles form submission and triggers the ADD_USER mutation
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -42,13 +56,16 @@ const SignupForm: React.FC<SignUpFormProps> = ({ handleModalClose }) => {
     }
 
     try {
+      // Executes the ADD_USER mutation using form state data as input variables
       const { data } = await addUser({
         variables: { input: { ...formState } },
       });
 
+      // Extract JWT token from the response and store it in Auth for authentication
       const { token } = data.addUser;
       Auth.login(token);
-      handleModalClose(); // Close the modal after successful signup
+      
+      handleModalClose(); // Close the modal after a successful signup
     } catch (err) {
       console.error(err);
       setShowAlert(true);
@@ -118,7 +135,7 @@ const SignupForm: React.FC<SignUpFormProps> = ({ handleModalClose }) => {
         </Button>
       </Form>
 
-      {/* Show error message from GraphQL mutation */}
+      {/* Show error details for a failed signup */}
       {error && <Alert variant="danger">{error.message}</Alert>}
     </>
   );

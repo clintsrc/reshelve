@@ -1,3 +1,13 @@
+/*
+ * LoginForm component
+ *
+ * Handles user login by executing the GraphQL LOGIN_USER mutation.
+ * The form collects the user's email and password, sends them to the backend,
+ *  and if successful, stores the JWT token in the Auth object for authentication.
+ * 
+ * Also manages error handling and provides user feedback in case of failure.
+ * 
+ */
 import { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
@@ -12,6 +22,7 @@ const LoginForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
+  // useMutation hook provides GraphQL support to execute the login mutation
   const [loginUser, { error }] = useMutation(LOGIN_USER);
   
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +41,7 @@ const LoginForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
     }
 
     try {
+      // Execute the LOGIN_USER mutation with email and password as variables
       const { data } = await loginUser({
         variables: {
           email: userFormData.email,
@@ -37,16 +49,18 @@ const LoginForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
         },
       });
 
+      // Extract the JWT token from the response then store it in the Auth object
       const { token } = data.loginUser;
       Auth.login(token);
 
-      handleModalClose(); // Close the modal if login is successful
+      // Close the modal if login on success
+      handleModalClose();
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
 
-    // Reset form after submission
+    // Reset the form after submission
     setUserFormData({
       username: '',
       email: '',
@@ -90,6 +104,7 @@ const LoginForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
           Submit
         </Button>
       </Form>
+      {/* Show error details for a failed login */}
       {error && <Alert variant="danger">{error.message}</Alert>}
     </>
   );
