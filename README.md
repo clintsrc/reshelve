@@ -3,14 +3,16 @@
 
 ## Description
 
-Reshelve is a MERN application using the Google Books API to manage a list of saved books in MongoDB with Mongoose ODM and supports JWT authentication. Originally it used a RESTful API, but has been refactored for Apollo server and the GraphQL API.
+Reshelve is a MERN application using JSON Web Token user authentication and the Google Books API to manage a list of saved books. Originally it used a RESTful API, but has been refactored for Apollo server and the GraphQL API.
 
-[![Apollo GraphQL](https://img.shields.io/badge/Apollo%20GraphQL-311C87?&style=for-the-badge&logo=Apollo%20GraphQL&logoColor=white)](https://www.apollographql.com/) 
-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/) 
-[![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white)](https://www.npmjs.com/package/jsonwebtoken) 
-[![Express.js](https://img.shields.io/badge/Express%20js-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/) 
 [![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/) 
-[![Font Awesome](https://img.shields.io/badge/Font_Awesome-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white)](https://fontawesome.com/) [![Render](https://img.shields.io/badge/Render-CI/CD-blue)](https://dashboard.render.com/) 
+[![Express.js](https://img.shields.io/badge/Express%20js-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/) 
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/) 
+[![Nodejs](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/en)  
+[![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white)](https://www.npmjs.com/package/jsonwebtoken) 
+[![Apollo GraphQL](https://img.shields.io/badge/Apollo%20GraphQL-311C87?&style=for-the-badge&logo=Apollo%20GraphQL&logoColor=white)](https://www.apollographql.com/) 
+[![Font Awesome](https://img.shields.io/badge/Font_Awesome-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white)](https://fontawesome.com/)  
+[![Render](https://img.shields.io/badge/Render-CI/CD-blue)](https://dashboard.render.com/) 
 
 ## Table of Contents
 
@@ -24,11 +26,11 @@ Reshelve is a MERN application using the Google Books API to manage a list of sa
 
 ## Installation
 
-1. Change the project's root directory  
+1. Change the project's root directory.  
 1. Install the dependency modules: npm install  
 1. Create the MongoDB database:
-   - Create a server/.env (refer to the .env.EXAMPLE located there)
-   - Set the database name and a random JWT password
+   - Create a server/.env (refer to the .env.EXAMPLE located there).
+   - Set the database name and a random JWT password.
 1. Build: npm run build  
 
 ## Usage
@@ -56,9 +58,9 @@ Thank you for your contributions!
 
 Test instructions:  
 1. Search for a title on the search page. Expect no Save button is available when you are not logged in.  
-1. Verify that only Search and Login/Sign Up options are avilable  
+1. Verify that only Search and Login/Sign Up options are avilable.  
 1. Create a new user from the login Signup. Expect a successful account creation unless information is missing or an invalid email is specified.  Expect to see additional options for See Your (saved) Books and only the Logout option.  
-1. Log out, log back in with the new account. Expect that you can login successfully with a valid account  
+1. Log out, log back in with the new account. Expect that you can login successfully with a valid account.  
 1. Check the saved books. Expect it to be empty if this is none have been added at this point.  
 1. Search for books, add them with the Save this Book button. Expect the button text to change to This book has already been saved.  
 1. Navigate to the saved books screen. Expect to see the saved books populated there.  

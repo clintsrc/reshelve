@@ -1,3 +1,14 @@
+/*
+ * User model
+ *
+ * Defines interfaces, schemas, virtual functions, getters and setters
+ * Compiles the User model from the schema
+ * 
+ * Each user's savedBooks is a subdocument embedded directly inside their UserDocument 
+ * for a one-to-many relationship
+ *
+ */
+
 import { Schema, model, type Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
@@ -58,7 +69,8 @@ userSchema.methods.isCorrectPassword = async function (password: string) {
   return await bcrypt.compare(password, this.password);
 };
 
-// when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
+/* when we query a user, we'll also get another field called `bookCount` with the 
+  number of saved books we have */
 userSchema.virtual('bookCount').get(function () {
   return this.savedBooks.length;
 });

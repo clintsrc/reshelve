@@ -1,3 +1,12 @@
+/*
+ * GraphQL Resolvers
+ *
+ * Defines the functions that handle GraphQL queries and mutations.
+ * Acts as the middleware layer between GraphQL and the MongoDB database.
+ * Uses Mongoose models to fetch, modify, and return data based on client requests.
+ *
+ */
+
 import User from "../models/User.js";
 import { signToken, AuthenticationError } from "../utils/auth.js";
 
@@ -52,7 +61,8 @@ const resolvers = {
 
     // Get the authenticated user's information from the context payload
     me: async (_parent: unknown, _args: any, context: any) => {
-      // If the user is authenticated, find their user information including their saved booklist
+      /* If the user is authenticated, find their user information including their 
+        saved booklist */
       console.log("me Received for user:", context.user._id);
       if (context.user) {
         return User.findOne({ _id: context.user._id });
@@ -147,7 +157,8 @@ const resolvers = {
         // Find the user
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: { bookId } } }, // remove the book from the saved list array
+          // remove the book from the saved list array
+          { $pull: { savedBooks: { bookId } } },
           { new: true } // Return the updated document
         );
 

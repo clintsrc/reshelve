@@ -1,3 +1,11 @@
+/*
+ * Connection
+ *
+ * Manage the connection to the mongodb server through mongoose.
+ * The database is initially created when a collection is accessed
+ *
+ */
+
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();  // check the env for MONGODB_URI
