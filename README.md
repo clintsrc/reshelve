@@ -34,7 +34,7 @@ Reshelve is a MERN application using the Google Books API to manage a list of sa
 ## Usage
 
 1. Start the server: npm run start:dev  
-1. See the ![spec](client/assets/docs/spec.md) for details of the original requirements  
+1. See the [spec](client/assets/docs/spec.md) for details of the original requirements  
 * See the active site deployed on Render [here](https://reshelve.onrender.com/)  
 Note that it takes a couple of minutes to spin up  
 ![Reshelve screenshot](client/assets/images/screenshot.jpg)
