@@ -1,3 +1,11 @@
+/*
+ * Navbar component
+ *
+ * Handles page loading and manages the HTML header.
+ * 
+ * Displays a modal dialog for user authentication (login and signup options).
+ * 
+ */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';

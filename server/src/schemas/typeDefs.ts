@@ -1,3 +1,11 @@
+/*
+ * GraphQL API structure
+ *
+ * Defines the structure of the GraphQL API using Schema Definition Language (SDL).
+ * Specifies data types, queries, and mutations for interacting with the backend.
+ * 
+ */
+
 const typeDefs = `
   type Book {
     _id: ID
