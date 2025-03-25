@@ -46,12 +46,9 @@ const startApolloServer = async () => {
   app.use(express.json());
 
   app.use(
-    // Create the GraphQL route: a single endpoint for all client API requests
     "/graphql",
-    // Configure the JWT authentication middleware
-    expressMiddleware(server as any, {
-      // Attaches user data from the JWT to the GraphQL context
-      context: authenticateToken as any,
+    expressMiddleware(server, {
+      context: ({ req }) => authenticateToken({ req }),
     })
   );
 
