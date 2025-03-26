@@ -48,6 +48,14 @@ interface RemoveBookArgs {
   bookId: string;
 }
 
+interface Context {
+  user?: {
+    _id: string;
+    username: string;
+    email: string;
+  };
+}
+
 const resolvers = {
   /***
    * Queries
@@ -60,10 +68,10 @@ const resolvers = {
     },
 
     // Get the authenticated user's information from the context payload
-    me: async (_parent: unknown, _args: any, context: any) => {
+    me: async (_parent: unknown, _args: unknown, context: Context) => {
       /* If the user is authenticated, find their user information including their 
         saved booklist */
-      console.log("me Received for user:", context.user._id);
+      console.log("me Received for user:", context.user?._id);
       if (context.user) {
         return User.findOne({ _id: context.user._id });
       }
@@ -89,7 +97,7 @@ const resolvers = {
         // Return the token and the user
         return { token, user };
       } catch (error) {
-        throw new Error("Error creating user.");
+        throw new Error(`Error creating user: ${error}`);
       }
     },
 
@@ -119,7 +127,7 @@ const resolvers = {
         // Return the token and the user
         return { token, user };
       } catch (error) {
-        throw new AuthenticationError("Login failed.");
+        throw new AuthenticationError(`Login failed ${error}`);
       }
     },
 
