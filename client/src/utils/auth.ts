@@ -42,6 +42,7 @@ class AuthService {
       
       return false;
     } catch (err) {
+      console.error('Invalid token', err);
       return false;
     }
   }
